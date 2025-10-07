@@ -25,6 +25,9 @@ class Review
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     private ?Player $player = null;
 
+    #[ORM\Column]
+    private ?float $note = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Review
     public function setPlayer(?Player $player): static
     {
         $this->player = $player;
+
+        return $this;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(float $note): static
+    {
+        $this->note = $note;
 
         return $this;
     }
