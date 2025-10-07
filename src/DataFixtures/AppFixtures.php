@@ -57,6 +57,17 @@ class AppFixtures extends Fixture
             $manager->persist($level);
             $levels[] = $level;
         }
+
+        $players = [];
+        for ($i = 1; $i <= 20; $i++) {
+            $player = new Player();
+            $player->setNom('Nom' . $i);
+            $player->setPrenom('Prenom' . $i);
+            $player->setBirthdate(new \DateTime(sprintf('1990-01-%02
+d', $i)));
+            $manager->persist($player);
+            $players[] = $player;
+        }
         // ============================== SAUVEGARDE =======================
         $manager->flush();
     }
