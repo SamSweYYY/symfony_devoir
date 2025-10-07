@@ -59,15 +59,38 @@ class AppFixtures extends Fixture
         }
 
         $players = [];
-        for ($i = 1; $i <= 20; $i++) {
-            $player = new Player();
-            $player->setNom('Nom' . $i);
-            $player->setPrenom('Prenom' . $i);
-            $player->setBirthdate(new \DateTime(sprintf('1990-01-%02
-d', $i)));
-            $manager->persist($player);
-            $players[] = $player;
-        }
+        $realPlayers = [
+    ['Kylian', 'Mbappé'],
+    ['Lionel', 'Messi'],
+    ['Cristiano', 'Ronaldo'],
+    ['Karim', 'Benzema'],
+    ['Erling', 'Haaland'],
+    ['Vinicius', 'Junior'],
+    ['Sadio', 'Mané'],
+    ['Riyad', 'Mahrez'],
+    ['Victor', 'Osimhen'],
+    ['Achraf', 'Hakimi'],
+    ['Marcus', 'Rashford'],
+    ['Jude', 'Bellingham'],
+    ['Harry', 'Kane'],
+    ['Antoine', 'Griezmann'],
+    ['Ousmane', 'Dembélé'],
+    ['Pedri', 'Gonzalez'],
+    ['Luka', 'Modric'],
+    ['Kevin', 'De Bruyne'],
+    ['Paulo', 'Dybala'],
+    ['Robert', 'Lewandowski'],
+];
+
+foreach ($realPlayers as $index => [$prenom, $nom]) {
+    $player = new Player();
+    $player->setPrenom($prenom);
+    $player->setNom($nom);
+    $player->setBirthdate(new \DateTime(sprintf('1990-01-%02d', $index + 1)));
+    $manager->persist($player);
+    $players[] = $player;
+}
+
         // ============================== SAUVEGARDE =======================
         $manager->flush();
     }

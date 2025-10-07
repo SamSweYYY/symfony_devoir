@@ -7,9 +7,8 @@
         <div class="card">
             <img src="{{ player.photo ?? 'https://via.placeholder.com/150' }}" alt="">
             <h3>{{ player.prenom }} {{ player.nom }}</h3>
-            <p>Catégorie : {{ player.categorie.nom }}</p>
+            <p>Catégorie : {{cat.nom}}</p>
             <p>Note moyenne : {{ averages[player.id]|default('Aucune')|round(1) }}/5</p>
-            <a href="{{ path('player_show', {id: player.id}) }}">Détails</a>
         </div>
     {% endfor %}
 </div>

@@ -21,7 +21,7 @@ class Player
     #[ORM\Column]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $birthdate = null;
 
     /**
@@ -69,10 +69,9 @@ class Player
         return $this->birthdate;
     }
 
-    public function setBirthdate(?\DateTimeInterface $birthdate): sELF
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
-
         return $this;
     }
 
