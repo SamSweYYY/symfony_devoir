@@ -57,19 +57,6 @@ class AppFixtures extends Fixture
             $manager->persist($level);
             $levels[] = $level;
         }
-
-        $players = [];
-        for ($i = 1; $i <= 20; $i++) {
-            $player = new Player();
-            $player->setNom('Nom' . $i);
-            $player->setPrenom('Prenom' . $i);
-            $player->setBirthdate(new \DateTime(sprintf('1990-01-%02d', $i)));
-            // Associer une catégorie et un niveau aléatoires
-            $player->setCategorie($categories[array_rand($categories)]);
-            $player->setLevel($levels[array_rand($levels)]);
-            $manager->persist($player);
-            $players[] = $player;
-            }
         // ============================== SAUVEGARDE =======================
         $manager->flush();
     }
