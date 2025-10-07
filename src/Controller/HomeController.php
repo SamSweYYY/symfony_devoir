@@ -1,18 +1,33 @@
 <?php
 
 namespace App\Controller;
-
+use App\Repository\PlayerRepository;
+use App\Repository\ReviewRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    #[Route('/', name: 'app_home')]
+    public function index(PlayerRepository $playerRepo, ReviewRepository $reviewRepo): Response
     {
+        $players = $playerRepo->findAll();
+
+        // Calculer la note moyenne pour chaque joueur
+        $averages = [];
+        foreach ($players as $player) {
+            $notes = [];
+            foreach ($player->getReviews() as $review) {
+                $notes[] = $review->getRating();
+            }
+            $averages[$player->getId()] = count($notes) > 0 ? array_sum($notes) / count($notes) : null;
+        }
+
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'players' => $players,
+            'averages' => $averages,
         ]);
     }
 }
